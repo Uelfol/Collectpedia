@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Collectpedia</title>
+        <link href="{{ url_for('static', filename='style2.css')}}" type="text/css" rel="stylesheet">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='logo2.svg')}}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+
+    <body id="body">
+        
+        <div id="container">
+            <div class="header-site">
+                <a href="/" class="logo-esq" title="Página Inicial">
+                    <img width="50" height="30" src="{{url_for('static', filename='logo2.svg')}}" alt=""> 
+                </a>
+                    <a href="/user/00000000" class="logo-dir" style="padding-top: 4px; grid-column: 9/11;" >Área do Usuário | Logar</a>
+                    <a href="/logout" class="logo-dir" style="padding-top: 4px; grid-column: 11;" >Logout</a>
+
+            </div>
+
+            {% block content %}
+            {% endblock content %}            
+        </div>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+
+<p class="texto-subtit">
+    COLEÇÃO <br>
+    {{nome}} 
+</p>
+
+<form method="POST" style="display: grid; grid-column: 1/13; grid-template-columns: repeat(12,1fr); grid-template-rows: auto;">
+
+    <div class="fundo-div-principal" id="oi1" style=" grid-row: 3; margin-top: 10px; grid-column: 4/10;">
+            {% for serie in res1 %}
+
+            <p>
+                    <div>
+                        <table style="width: 100%; font-size: 20px;">
+
+                            <tr>
+                                <td>{{serie[0]}}</td>
+                                <td>VOL {{serie[1]}}</td>
+                                <td>Edições possuídas {{serie[2]}}</td>
+                                <td>
+                                    {% for serie_f in res3%}
+                                    {% if (serie[0], serie[1]) == (serie_f[0], serie_f[1]) %}
+                                        Edições faltantes {{serie_f[2]}}
+                                    {% endif%}
+                                    {% endfor %}
+                                </td>
+                                <td><button type="button" onclick="show_hide(this.value)" value=".{{serie[0].replace(' ', '_')}}_{{serie[1]}}" class="bot-opc">Exibir info.</button></td>
+                            </tr>
+                        </table>
+                         <div class="{{serie[0].replace(' ', '_')}}_{{serie[1]}}"  style="display: none;">
+                                {% for exemplar in res2%}
+                                    {% if (exemplar[0],exemplar [1]) == (serie[0], serie[1]) %}
+
+                                        <table style="width: 90%; margin-left: 10%; justify-self: center;">
+                                            
+                                            <tr class=" text-align: center;">
+                                                <th>Série</th>
+                                                <th>Nº</th>
+                                                <th>Comprado em</th>
+                                                <th>Conservação</th>
+                                                <th>Selecionar</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{exemplar[0]}}</td>        
+                                                <td>#{{exemplar[2]}}</td>
+                                                <td>{{exemplar[3]}}</td>
+                                                <td>{{exemplar[4]}}</td>
+                                                <td><input type="radio" name="del-exemplar" value="{{exemplar[0].replace(' ', '+')}}_{{exemplar[1]}}_{{exemplar[2]}}_{{exemplar[5]}}"></td>
+                                            </tr>
+                                        
+                                        </table>
+                                        <div style="display: none;">{{exemplar[5]}}</div>
+                                        <br><br>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                </div>
+            </p>
+            {% endfor %}
+    </div>
+
+
+        <div style="grid-column: 8/10; grid-row: 2;">
+            <input type="submit" name="remover" id="remover" value="Remover" style="display: none;" formaction="/remover_exemplar/{{nome}}">
+        <label  for="remover" class="bot-dir-inf">
+            REMOVER
+        </label>
+        </div>
+</form>
+
+<script>
+    let mostrar = true;
+    function show_hide(variavel){
+        let x = document.querySelector(variavel);
+        if (mostrar){
+            x.style.display = "block";
+            mostrar = false;
+        }else{
+            x.style.display = "none";
+            mostrar = true;
+        }
+    }
+</script>
+
+
+{% endblock content %}

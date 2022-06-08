@@ -1,0 +1,30 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+
+
+<p class="texto-subtit">
+    LOGAR NA CONTA
+</p>
+
+<form action="/logar" style="grid-column: 4/10;" method="post">
+
+    <div class="fundo-div-principal" style="grid-row: 3; padding: 25px 20px 30px 30px;">
+
+      
+        {{vet}}
+        <p> <input type="email" placeholder="Email" name="email" class="texto_busca" style="width: 40%;"></p>
+        <p><input type="password" placeholder="Senha" name="senha" class="texto_busca" style="width: 40%;"></p>
+    
+        <div style="margin-top: 10%; grid-column: 4; text-align: start;"> 
+            Não possui uma conta? Então, clique 
+            <a href="/signup" style="color: var(--vermlar_escuro);">aqui</a> para fazer o cadastro.
+        </div>
+    
+    </div>
+    
+    <input type="submit" name="acao" value="Entrar" class="bot-buscar-home" style="margin-left: 85%; margin-bottom: 31%;">
+
+</form>
+
+{% endblock content %}

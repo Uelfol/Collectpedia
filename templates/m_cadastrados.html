@@ -1,0 +1,87 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+
+<form action="/add_exemplar" method="POST" style="grid-row: 4;grid-column: 1/13; display: grid; grid-template-columns: repeat(12,1fr); ">
+<div class="texto-subtit" style="grid-column: 3/13; grid-row: 2/3; display: grid; grid-template-columns: repeat(10,1fr); grid-template-rows: auto; margin-bottom: 5%;">
+    <div style="grid-row: 1; font-size: 32px; grid-column: 1/5;">{{prem_esq[0][0]}}</div>
+    <div style="grid-row: 2; grid-column: 1/4; margin-left: 5%;">Nome Original: {{jap}} Demografia: {{demo}}</div>
+    <div style="grid-row: 2; grid-column: 4/7;"> Editora: {{editora}}</div>
+    <div style="grid-row: 2; grid-column: 7;"><input type="submit" name="add" id="add" value="Adicionar" class="bot-dir-inf" formaction="/add_exemplar"></div>
+</div>
+
+<div class="fundo-div-principal" style="overflow: auto; grid-row: 3/5; grid-column: 3/8; margin-right: 20px;">
+
+        <table style="width: 100%; font-size: 22px; justify-self: center;">
+            <tr>
+                <th>Nome</th>
+                <th>Nº</th>
+                <th>Preço</th>
+            </tr>
+        </table>
+    {% for linha in prem_esq%}
+        <table style="width: 100%; font-size: 25px; justify-self: center;">
+            <tr>
+                    <td>{{linha[0]}}</td>
+                    <td>
+                        <a style="color: var(--vermlar_claro);" href="/manga/{{demo}}/{{editora}}/{{linha[0].replace(' ', '_')}}/{{jap}}/{{vol}}/{{linha[1]}}" 
+                        style="text-decoration: none;" > #{{linha[1]}} </a>
+
+                    </td>
+                    <td>{{linha[2]}} {{linha[3]}}</td>
+            </tr>
+            <tr></tr>
+        </table>
+    {% endfor%}
+        
+</div>
+<div class="fundo-div-principal" style="grid-row: 3; grid-column: 8/11; margin: 0 20% 10% 20%;">
+    {% if num != '0' %}
+    <img src="{{prem_dir[0][9]}}" height="338" width="220" alt="">
+</div>
+
+
+<div class="fundo-div-principal" style="grid-row: 4; grid-column: 8/11;">
+
+    <p>
+        <table style="width: 100%;">
+            <tr>
+                <td>Série: {{prem_dir[0][0]}}</td>
+                <td>Quant. de capítulos: {{prem_dir[0][2]}}</td>
+            </tr>
+            <tr>
+                <td>{{prem_dir[0][3]}} {{prem_dir[0][4]}}</td>
+                <td>Data de Publicação: {{prem_dir[0][5]}}</td>
+            </tr>
+            {% for contribuidor in prem_dir%}
+                <tr>
+                    <td>{{contribuidor[6]}} ({{contribuidor[7]}})</td>
+                </tr>
+            {% endfor%}
+            <tr>
+                <td>Estado de Publicação: {{prem_dir[0][8]}}</td>
+            </tr>
+        </table>
+    </p>
+    Adicionar na coleção 
+    <input type="checkbox" name="ed_add" 
+    id="{{prem_dir[0][0].replace(' ', '+')}}_{{vol}}_{{prem_dir[0][1]}}" value="{{prem_dir[0][0].replace(' ', '+')}}_{{vol}}_{{prem_dir[0][1]}}_{{prem_dir[0][5]}}">
+    {% endif%}
+</div>
+
+</form>
+
+<script>
+    let mostrar = true;
+    function show_hide(variavel){
+        let x = document.getElementById(variavel);
+        if (mostrar){
+            x.style.display = "grid";
+            mostrar = false;
+        }else{
+            x.style.display = "none";
+            mostrar = true;
+        }
+    }
+</script>
+{% endblock content %}

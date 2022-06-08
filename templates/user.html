@@ -1,0 +1,198 @@
+{% extends 'layouts.html'%}
+
+{% block content %}
+
+<div class="texto-subtit" style="display: grid; grid-template-columns: repeat(4,1fr); grid-template-rows: 2fr,1fr; grid-column: 3/13; grid-row:2;">
+    <section >{{username.upper()}} </section>
+</div>
+
+<div style="grid-row: 3;" class="texto-subtit" >
+    <section style="font-size: large; margin-left: 20px;"> Email: {{email}}</section>
+</div>
+
+<div class="fundo-div-principal" style="grid-row: 4; grid-column: 2/7; margin-right: 5%;">
+    
+            <form action="/exibir_info/" method="post">
+                {%for linha in matriz%}
+                
+                    <div style="display: flex; justify-content: space-between; font-size: 24px;">
+                        {{linha[0].upper()}}
+                        {% if linha[1] != '0'%}
+                            <input type="radio" name="escolha" value="{{linha[0]}}" required>
+                        {%else%}
+                            <input type="radio" name="escolha" value="{{linha[0]}}" required style="display: none;">
+                        {% endif%}
+                    </div>
+
+                    <table style="width: 100%; font-size: 18px;">
+                        <tr>
+                            <td>Quantidade de exemplares: <a style="color: var(--vermlar_claro) ;">{{linha[1]}}</a></td>
+                            <td>Última aquisição feita em: <a style="color: var(--vermlar_claro) ;">{{linha[2]}}</a></td>
+                        </tr>
+                        <p></p>
+                    </table>
+                    <p></p>
+                
+                {% endfor%}
+                {% if matriz %}
+                <input type="submit" id="nome_col1"  value="submit" style="display: none;">
+                
+                <div>
+                    <label for="nome_col1" class="bot-opc" style="font-size: 18px;" >Exibir info.</label>
+                </div>
+                {% endif%}
+            </form>
+    
+    
+    <form action="/adm_colecoes">
+        <br><br>
+        <div style="display: flex; justify-content: flex-end;">
+            <button name="adm_col"
+            class="bot-opc" style=" font-size: var(--font-sz-max); width: 150px;">
+            Administrar
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<div class="fundo-div-principal" style="min-height: 500px; grid-row: 4; grid-column: 7/12; display: grid; grid-template-columns: repeat(15,1fr); grid-template-rows: 0.25fr 0.5fr 0.3fr; padding-left: 20px; padding-top: 5%; padding-right: 0px; padding-bottom: 0%; margin-bottom: 0;">
+    {% if r1[0][0] == '0' %}
+    <div style="grid-column: 4/7; grid-row: 2/4;">
+    <img width="500" height="250" src="/static/logo2.svg" style="opacity: 0.5;">
+    <a style="font-size: var(--font-sz-maxx); font-family: var(--font_logo); opacity: 0.5; margin-left: 30%; ">Collectpedia</a>
+
+    </div>
+
+
+    {% else%}
+    
+        <section style="grid-row: 1; grid-column: 1/5; text-align: left; align-self: center;">
+            {% if r1[0][0] != '0' %}
+            <a href="/colecao/{{r1[0][0]}}" style="color: var(--vermlar_claro); text-decoration: none; font-size: 24px;">{{r1[0][0].upper()}}</a>
+            {% endif%}
+            <p></p>
+            
+        </section>
+        
+        <section style="grid-row: 2; grid-column: 1/6;">
+            
+                    <div>
+                    
+                        {% if r1[0][0] != '0' %}
+                            <div class="tx-u-c" style="text-align: start;">
+                                Quantidade total de exemplares <br>
+                            </div>
+
+                            <div class="tx-u-v">
+                                <a style="color: var(--vermlar_claro) ;">{{r1[0][2]}}</a> <br>
+                            </div>
+                        {% endif%}
+
+                        {% if r1[0][0] != '0' %}
+                            <div class="tx-u-c"style="text-align: start;">
+
+                                <br> Quantidade de editoras diferentes <br>
+                            </div>
+
+                            <div class="tx-u-v">
+
+                                <a style="color: var(--vermlar_claro) ;">{{r1[0][1]}}</a><br>
+                            </div>
+                        {% endif%}
+                        <div class="tx-u-c"style="text-align: start;">
+
+                            <br> Status de Publicação das séries <br>
+                        </div>
+                        
+                        {% for status in r2 %}
+                            <p>
+                                <div style="margin-left: 8%;">
+                                    <div style=" text-align: end; margin-right: 20%; font-size: 15px;">
+
+                                        {{status[0]}} <a style="color: var(--vermlar_claro);">{{status[1]}}</a> <br>
+                                    </div>
+                                </div>
+                            </p>
+                        {% endfor %}
+                    </div>
+            
+        </section>
+        
+        <section style="grid-row: 2; grid-column: 6/12;">
+
+            <div>
+                <div class="tx-u-c">
+
+
+                    Top Gêneros Presentes<br>
+                </div>
+                <div style="display: flex; justify-content: space-evenly; ">
+                {% for genero in r3 %}
+                    <a style="color: var(--vermlar_claro) ;">{{genero[0]}}</a> 
+                {% endfor%}
+                </div>
+
+                {% if r4 %}
+                <div class="tx-u-c">
+
+                
+                    <br> Top Roteirista em títulos<br>
+                </div>
+                <div class="tx-u-v">
+                <a style="color: var(--vermlar_claro) ;">{{r4[0][0]}}</a> <br>
+                </div>
+                {% endif%}
+                
+                {% if r5 %}
+                <div class="tx-u-c">
+
+
+                    <br> Top Desenhista em títulos<br>
+                </div>
+                <div class="tx-u-v">
+                    <a style="color: var(--vermlar_claro) ;">{{r5[0][0]}}</a> 
+                </div>
+                {% endif %}
+
+                {% if r6 %}
+                <div class="tx-u-c">
+
+                
+                    <br> Top Mangaka em títulos<br>
+                </div>
+                <div class="tx-u-v">
+                    <a style="color: var(--vermlar_claro) ;">{{r6[0][0]}}</a> 
+                </div>
+                {% endif %}
+            </div>
+        </section>
+        
+        <section style="grid-row: 2; grid-column: 12/16;">
+
+            <div>
+                {% if r7 %}
+                <div class="tx-u-c">
+
+                    Demografia principal<br>
+                </div>
+                    <a style="color: var(--vermlar_claro) ; margin-right: 0%;">{{r7[0][0]}}</a> 
+                {% endif %}
+            </div>
+        </section>
+
+        <section style="grid-row: 3; grid-column: 6/10; display: flex;">
+            <p></p>
+            <div>
+                {% if r8 %}
+                <p style="font-size: 22px ;">Coleção nos últimos 5 meses
+                    <img src="/static/grafico.png" height="360" width="480">
+                </p>
+                {% endif %}
+            </div>
+        </section>
+    
+    </div>
+    {% endif %}
+
+{% endblock content %}

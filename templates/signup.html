@@ -1,0 +1,30 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+
+<p class="texto-subtit">
+    CRIAR USUÁRIO
+</p>
+
+<form action="/cadastrar" method="POST" style="grid-column: 1/13; display: grid; grid-template-columns: repeat(12,1fr); grid-template-rows: auto;">
+    <div class="fundo-div-principal" style="grid-row: 3; padding: 35px 20px 30px 30px;">
+
+            <p><input type="text" name="usern" placeholder="Nome do usuário" class="texto_busca" style="width: 40%;" required></p>
+            <p> <input type="email" name="email" placeholder="Email" class="texto_busca" style="width: 40%;" required></p>
+            <p><input type="password" name="senha" placeholder="Senha" class="texto_busca" style="width: 40%;" required></p>
+            <input type="password" name="conf_s" placeholder="Confirmar senha" class="texto_busca" style="width: 40%;" minlength="6" maxlength="15" required>
+
+
+            <div style="margin-top: 15%; grid-column: 4; text-align: start;"> 
+                Já possui uma conta? Então, clique 
+                <a href="/login" style="color: var(--vermlar_escuro);"> aqui </a> para fazer o login.
+            </div>
+        
+    </div>
+
+            <input type="submit" name="cadastrar" id="cadastrar" value="Cadastrar" style="grid-row: 4; grid-column: 9/11;" class="bot-buscar-home">
+
+
+</form>
+
+{% endblock content %}

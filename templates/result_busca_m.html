@@ -1,0 +1,41 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+
+<p class="texto-subtit">
+    RESULTADOS PARA BUSCA "{{busca}}"
+</p>
+
+<div class="fundo-div-principal" style="grid-row: 3;">
+    {% for linha in result%}
+    <p>
+        <table style="width: 100%; font-size: 18px;">
+            <tr>
+                <td style="font-size: 24px;">
+                    <a href="/manga/{{linha[5]}}/{{linha[4]}}/{{linha[0].replace(' ', '_')}}/{{linha[1]}}/{{linha[6]}}/0" 
+                    style="text-decoration: none; color: var(--vermlar_claro);" >{{linha[0]}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Nome Japonês: {{linha[1]}}</td>
+                <td>Quant. Tankos: {{linha[2]}}</td>
+                <td>Ano Pub: {{linha[3]}}</td>
+                <td>Editora: {{linha[4]}}</td>
+                <td>Demografia: {{linha[5]}}</td>
+            </tr>
+        </table>
+    <div style="display: none;">{{linha[6]}}</div>
+    </p>
+    {% endfor%}
+</div>
+
+<form action="/" style=" grid-row: 4; grid-column: 9/11;">
+    
+    <button id="btvoltar"></button>
+    <label  for="btvoltar" class="bot-dir-inf">
+        PÁGINA PRINCIPAL
+    </label>
+</form>
+
+
+{% endblock content %}

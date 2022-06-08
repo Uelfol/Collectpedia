@@ -1,0 +1,104 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+<div class="texto-subtit" style="grid-column: 3/13; grid-row:2;">
+    <section >Adm. Coleções </section>
+</div>
+<div style="grid-row: 5; grid-column: 9;">
+ 
+
+    <button onclick="show_hide(this.value)" value="editar_colecao" class="bot-opc" style="font-size: 22px;">Editar/Remover</button>
+</div>
+
+<div style="grid-row: 5; grid-column-end: 5;">
+    <button onclick="show_hide(this.value)" value="criar_colecao" class="bot-opc" style="font-size: 22px;">Criar Coleção</button>
+</div>
+<div class="fundo-div-principal">
+    
+    {%for linha in matriz%}
+
+    <div style="display: flex; justify-content: space-evenly; padding: 15px 0 25px 0;">
+    
+        <table style="width: 100%; font-size: 20px;">
+            <tr>
+                <td>
+                    <form action="/editar_colecao" method="post">
+                        <input type="radio" name="escolha" value="{{linha[0]}}">
+                </td>
+                <td>{{linha[0].upper()}}</td>
+                <td>Quantidade de exemplares:
+                    {% if linha[1] == None %}
+                    <a style="color: var(--vermlar_claro) ;">0</a>
+                    {%else%}
+                    <a style="color: var(--vermlar_claro) ;">{{linha[1]}}</a>
+                    {% endif%}</td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="editar_colecao" id="editar_colecao" style=" display: none; grid-row: 5; grid-template-columns: repeat(12,1fr); grid-template-rows: repeat(3,1fr); padding-left: 20px; margin-top: 5%;">
+
+        <section style="grid-row: 1; grid-column: 1/5; text-align: left; font-size: 30px;">
+            Editar/Remover
+        </section>
+        
+        
+        <section style="grid-row: 2; grid-column: 1/5;">
+            <input type="text" name="editar_nome_colecao" 
+            placeholder="Nome da coleção" class="texto_busca">
+
+        </section>
+        
+        <section style="grid-row: 3; grid-column: 9/13;">
+            <input type="submit" name="add_colecao_nova" value="Renomear" 
+            class="bot-buscar-home">
+        </section>
+
+        
+            <section style="grid-row: 3; grid-column: 5/8;">
+                <input type="submit" name="add_colecao_nova" value="Remover" 
+                class="bot-buscar-home" formaction="/deletar_colecao">
+            </section>
+        </form>
+    
+</div>
+
+<div class="editar_colecao" id="criar_colecao" style=" display: none; grid-row: 5; grid-template-columns: repeat(12,1fr); grid-template-rows: 0.2fr 0.6fr 0.6fr; padding-left: 20px; margin-top: 5%;">
+    
+        <section style="grid-row: 1; grid-column: 1/5; text-align: left; font-size: 30px;">
+            Criar nova coleção
+        </section>
+
+
+        <form action="/criar_colecao" method="post" style="grid-row:2/4; grid-column: 1/13; display: grid; grid-template-columns: repeat(12,1fr); grid-template-rows: repeat(2,1fr);">
+            <section style="grid-row: 2; grid-column: 1/5;">
+                <input type="text" name="nome_colecao_nova" 
+                placeholder="Nome da coleção" class="texto_busca" required>
+
+            </section>
+        
+            <section style="grid-row: 3; grid-column: 9/12;">
+            <input type="submit" name="add_colecao_nova" value="Adicionar" 
+            class="bot-buscar-home">
+        </section>
+    </form>
+    
+</div>
+
+<script>
+    let mostrar = true;
+    function show_hide(variavel){
+        let x = document.getElementById(variavel);
+        if (mostrar){
+            x.style.display = "grid";
+            mostrar = false;
+        }else{
+            x.style.display = "none";
+            mostrar = true;
+        }
+    }
+</script>
+{%endblock content%}

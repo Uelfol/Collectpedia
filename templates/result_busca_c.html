@@ -1,0 +1,38 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+
+<p class="texto-subtit">
+    RESULTADOS PARA BUSCA "{{busca}}"
+</p>
+
+<div class="fundo-div-principal" style="grid-row: 3;">
+    {% for linha in result%}
+    <p>
+        <table style="width: 100%; font-size: 22px;">
+            <tr>
+                <td>
+                    <a href="/serie/{{linha[4]}}/{{linha[0].replace(' ', '_')}}/{{linha[1]}}/0"
+                     style="text-decoration: none; color: var(--vermlar_claro);" >{{linha[0]}}</a>
+                </td>
+                <td>VOL: {{linha[1]}}</td>
+                <td>Quant. Eds: {{linha[2]}}</td>
+                <td>Ano Pub: {{linha[3]}}</td>
+                <td>Editora: {{linha[4]}}</td>
+            </tr>
+        </table>
+     
+    </p>
+    {% endfor%}
+</div>
+
+<form action="/" style=" grid-row: 4; grid-column: 9/11;">
+    
+    <button id="btvoltar"></button>
+    <label  for="btvoltar" class="bot-dir-inf">
+        PÁGINA PRINCIPAL
+    </label>
+</form>
+
+
+{% endblock content %}
