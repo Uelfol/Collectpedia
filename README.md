@@ -8,5 +8,7 @@ Desenvolvido com base em Python/Flask, HTML e CSS
 
 Integrantes:
 Guilherme Ribeiro Figueiredo      https://github.com/Uelfol   
+
 Mateus Mascagni                   https://github.com/NoobSupp
+
 Roberto Nicácio Guimarães         https://github.com/robng98 
